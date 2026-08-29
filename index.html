@@ -1,13 +1,4 @@
-from pathlib import Path
-import shutil
-
-src = Path("/mnt/data/jan-kalyan-foundation-index.html")
-dst = Path("/mnt/data/index.html")
-
-if src.exists():
-    shutil.copy2(src, dst)
-else:
-    dst.write_text("""<!doctype html>
+("""<!doctype html>
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
@@ -47,6 +38,4 @@ document.getElementById("custom").oninput=e=>{amount=+e.target.value||0;document
 document.getElementById("next").onclick=()=>alert("QR payment page के लिए अपनी UPI ID code में सेट करें।");
 </script>
 </body>
-</html>""", encoding="utf-8")
-
-print(f"Ready: {dst}")
+</html>""
