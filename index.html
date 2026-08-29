@@ -1,41 +1,119 @@
-("""<!doctype html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>Jan Kalyan Foundation — समाज सेवा</title>
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f5f0e5;color:#202820}
-header{position:sticky;top:0;background:#f5f0e5;padding:14px;text-align:center;border-bottom:1px solid #ddd;z-index:5}
-.logo{display:inline-grid;place-items:center;width:48px;height:48px;border-radius:50%;background:#315a42;color:#fff;border:3px solid #d7a441;font-weight:bold}
-main{max-width:480px;margin:auto;padding:25px 18px 110px}
-h1{font-size:32px}h1 span{color:#b84e2d}
-.card{background:#fff;border:1px solid #ddd;border-radius:8px;padding:16px;margin:16px 0}
-.amounts{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-.amount{padding:14px;text-align:center;background:#f1eadb;border:1px solid #ddd;border-radius:5px;font-weight:bold}
-.amount.active{border:2px solid #b84e2d;color:#b84e2d}
-input{width:100%;padding:12px;margin-top:10px;box-sizing:border-box}
-button{width:100%;padding:15px;border:0;border-radius:6px;background:#b84e2d;color:white;font-weight:bold;font-size:16px;margin-top:12px}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#f5f0e5;padding:12px;z-index:10}
+:root{--paper:#f5f0e5;--ink:#202820;--green:#315a42;--green2:#244734;--orange:#b84e2d;--gold:#d7a441;--line:#d8cfbd}
+*{box-sizing:border-box}html,body{margin:0;background:#e7e0d1;color:var(--ink);font-family:Arial,"Noto Sans Devanagari",sans-serif}
+body{overflow-x:hidden}.app{max-width:480px;margin:auto;min-height:100vh;background:var(--paper);box-shadow:0 0 40px #0002}
+.fixed-head{position:sticky;top:0;z-index:50;background:rgba(245,240,229,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 16px}
+.brand{display:flex;align-items:center;gap:11px}.logo{width:48px;height:48px;border-radius:50%;background:var(--green);display:grid;place-items:center;color:#fff;border:3px solid var(--gold);font-weight:900;font-size:18px;box-shadow:0 3px 10px #0002}.brand h2{font-size:18px;margin:0;font-weight:800}.brand p{font-size:11px;margin:2px 0 0;color:#657064}
+.hero{padding:24px 18px 18px}.eyebrow{font-size:11px;letter-spacing:.12em;color:var(--orange);font-weight:800}.hero h1{font-size:34px;line-height:1.08;margin:8px 0 12px}.hero h1 span{color:var(--orange)}.hero p{font-size:15px;line-height:1.6;color:#515950;margin:0}
+.gallery{display:flex;gap:9px;overflow-x:auto;padding:0 18px 17px;scroll-snap-type:x mandatory}.gallery img{width:82%;height:260px;object-fit:cover;border-radius:7px;scroll-snap-align:center;border:1px solid #0002;flex:none}
+.card{margin:0 18px 16px;background:#fbf8f0;border:1px solid var(--line);border-radius:8px;padding:17px}.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:4px 0 18px}.stat{text-align:center;padding:12px 4px;border-right:1px solid var(--line)}.stat:last-child{border:0}.stat b{display:block;font-size:20px;color:var(--green2)}.stat small{font-size:10px;color:#70776e}
+h3{margin:0 0 10px;font-size:18px}.bullets{margin:0;padding-left:19px}.bullets li{margin:8px 0;line-height:1.45;font-size:14px}
+.amounts{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.amount{border:1px solid var(--line);background:#f3ecdc;padding:13px 4px;border-radius:5px;text-align:center;font-weight:800;cursor:pointer}.amount.active{border:2px solid var(--orange);background:#f6e1d8;color:var(--orange)}
+.custom{display:flex;margin-top:10px;border:1px solid var(--line);border-radius:5px;background:#fff;padding:11px}.custom span{font-weight:800}.custom input{border:0;outline:0;background:transparent;width:100%;font-size:16px;padding-left:7px}
+.pay{position:sticky;bottom:0;z-index:40;padding:12px 18px;background:rgba(245,240,229,.97);border-top:1px solid var(--line)}button{width:100%;border:0;border-radius:6px;padding:15px;background:var(--orange);color:#fff;font-size:16px;font-weight:800;cursor:pointer}.note{text-align:center;color:#73796f;font-size:11px;margin:8px 0 0}
+.qr-page{display:none;padding-bottom:25px}.qr-page.show{display:block}.main-page.hide{display:none}.qrbox{text-align:center;margin:0 18px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:20px}.qr{width:190px;height:190px;margin:12px auto;background:repeating-linear-gradient(45deg,#111 0 3px,#fff 3px 6px);border:10px solid #fff;box-shadow:0 0 0 1px #ddd}.upi{font-family:monospace;background:#f2eee4;padding:10px;border-radius:4px;font-size:13px}.fields input{width:100%;padding:12px;margin-top:9px;border:1px solid var(--line);border-radius:5px;font-size:14px}.small{font-size:11px;color:#777;margin-top:8px}
+.wait{display:none;text-align:center;padding:65px 22px}.wait.show{display:block}.circle{width:110px;height:110px;border:7px solid #ddd;border-top-color:var(--orange);border-radius:50%;margin:auto;display:grid;place-items:center;font-size:23px;font-weight:900;animation:spin 1.2s linear infinite}.circle span{animation:none}@keyframes spin{to{transform:rotate(360deg)}}.wait h2{font-size:24px;margin:25px 0 8px}.wait p{color:#626a62;line-height:1.55}
+.footer{padding:20px 18px 100px;text-align:center;font-size:11px;color:#777}
 </style>
 </head>
 <body>
-<header><div class="logo">JKF</div><br><b>Jan Kalyan Foundation</b><br><small>समाज सेवा</small></header>
-<main>
-<h1>प्रभावित परिवारों तक <span>मदद पहुँचाएँ</span></h1>
-<p>आपका सहयोग राहत कार्यों में सहायता कर सकता है।</p>
-<div class="card"><b>योगदान की राशि चुनें</b>
-<div class="amounts" style="margin-top:12px">
-<div class="amount" data-a="51">₹51</div><div class="amount" data-a="101">₹101</div><div class="amount" data-a="501">₹501</div>
-<div class="amount" data-a="1101">₹1,101</div><div class="amount" data-a="2100">₹2,100</div><div class="amount" data-a="5100">₹5,100</div>
-</div><input id="custom" type="number" min="51" placeholder="अपनी राशि लिखें"></div>
-</main>
-<div class="bottom"><button id="next" disabled>आगे बढ़ें — QR कोड खोलें →</button></div>
+<div class="app">
+  <header class="fixed-head">
+    <div class="brand">
+      <div class="logo">JKF</div>
+      <div><h2>Jan Kalyan Foundation</h2><p>समाज सेवा · राहत एवं पुनर्वास</p></div>
+    </div>
+  </header>
+
+  <main id="mainPage" class="main-page">
+    <section class="hero">
+      <div class="eyebrow">आपदा राहत अभियान</div>
+      <h1>बाढ़ से प्रभावित परिवारों तक <span>मदद पहुँचाएँ</span></h1>
+      <p>आपका छोटा-सा सहयोग भोजन, पानी, दवा और जरूरी राहत सामग्री पहुँचाने में मदद कर सकता है।</p>
+    </section>
+
+    <section class="card">
+      <div class="stats">
+        <div class="stat"><b>12,400+</b><small>प्रभावित परिवार</small></div>
+        <div class="stat"><b>45+</b><small>राहत शिविर</small></div>
+        <div class="stat"><b>₹8.5L+</b><small>एकत्रित सहयोग</small></div>
+      </div>
+      <h3>आपकी मदद कहाँ जाएगी?</h3>
+      <ul class="bullets">
+        <li>राशन किट (आटा, चावल, दाल, तेल)</li>
+        <li>पीने का साफ पानी और मेडिकल किट</li>
+        <li>बच्चों और बुजुर्गों के लिए तिरपाल व कपड़े</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h3>सहयोग राशि चुनें</h3>
+      <div class="amounts">
+        <div class="amount" data-val="101">₹101</div>
+        <div class="amount active" data-val="251">₹251</div>
+        <div class="amount" data-val="501">₹501</div>
+        <div class="amount" data-val="1100">₹1,100</div>
+        <div class="amount" data-val="2100">₹2,100</div>
+        <div class="amount" data-val="5100">₹5,100</div>
+      </div>
+      <div class="custom">
+        <span>₹</span>
+        <input type="number" id="customAmt" placeholder="अन्य राशि दर्ज करें (न्यूनतम ₹51)">
+      </div>
+    </section>
+  </main>
+
+  <div id="paybar" class="pay">
+    <button id="next">आगे बढ़ें (<span id="chosen">आपका योगदान: ₹251</span>)</button>
+    <div class="note">सुरक्षित भुगतान · जन कल्याण फाउंडेशन</div>
+  </div>
+
+  <div id="qrPage" class="qr-page">
+    <div style="padding:15px 18px 0;">
+      <button id="back" style="background:var(--green);margin-bottom:15px;width:auto;padding:8px 16px;font-size:14px;">← वापस जाएँ</button>
+    </div>
+    <div class="qrbox">
+      <h3 style="margin:0 0 5px;">QR कोड स्कैन करें</h3>
+      <p style="margin:0 0 10px;font-size:13px;color:#555;">किसी भी UPI ऐप (PhonePe, Google Pay, Paytm) से भुगतान करें</p>
+      <div class="qr"></div>
+      <div class="upi">UPI ID: jkf.relief@upi</div>
+      <h2 id="qrAmt" style="margin:15px 0 5px;color:var(--orange);">₹251</h2>
+      <div class="fields">
+        <input type="text" id="uname" placeholder="आपका पूरा नाम (वैकल्पिक)">
+        <input type="tel" id="uphone" placeholder="मोबाइल नंबर (रसीद के लिए)">
+        <input type="text" id="utrn" placeholder="12-अंकों का UTR / Txn ID दर्ज करें">
+      </div>
+      <button id="confirm" style="margin-top:15px;">भुगतान की पुष्टि करें</button>
+      <div class="small">भुगतान के बाद UTR नंबर दर्ज करके पुष्टि बटन दबाएँ।</div>
+    </div>
+  </div>
+
+  <div id="wait" class="wait">
+    <div class="circle"><span id="timer">02:45</span></div>
+    <h2>सत्यापन जारी है...</h2>
+    <p>कृपया इस पेज को बंद न करें। आपके भुगतान की पुष्टि की जा रही है।</p>
+    <div id="waitAmt" style="margin-top:15px;font-weight:bold;color:var(--green2);"></div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 Jan Kalyan Foundation. सर्वाधिकार सुरक्षित।</p>
+  </footer>
+</div>
+
 <script>
-let amount=0;
-document.querySelectorAll(".amount").forEach(x=>x.onclick=()=>{amount=+x.dataset.a;document.querySelectorAll(".amount").forEach(y=>y.classList.remove("active"));x.classList.add("active");document.getElementById("next").disabled=false});
-document.getElementById("custom").oninput=e=>{amount=+e.target.value||0;document.querySelectorAll(".amount").forEach(y=>y.classList.remove("active"));document.getElementById("next").disabled=amount<51};
-document.getElementById("next").onclick=()=>alert("QR payment page के लिए अपनी UPI ID code में सेट करें।");
+let amount=251,timerId=null;
+const amounts=document.querySelectorAll('.amount'),custom=document.getElementById('customAmt'),chosen=document.getElementById('chosen');
+amounts.forEach(x=>{x.onclick=()=>{amounts.forEach(y=>y.classList.remove('active'));x.classList.add('active');amount=+x.dataset.val;custom.value='';chosen.textContent='आपका योगदान: ₹'+amount.toLocaleString('en-IN')}});
+custom.oninput=()=>{amount=+custom.value||0;amounts.forEach(y=>y.classList.remove('active'));chosen.textContent=amount>=51?'आपका योगदान: ₹'+amount.toLocaleString('en-IN'):'न्यूनतम ₹51 रखें'};
+document.getElementById('next').onclick=()=>{if(amount<51)return alert('कृपया कम से कम ₹51 की राशि चुनें।');document.getElementById('mainPage').classList.add('hide');document.getElementById('paybar').style.display='none';document.getElementById('qrPage').classList.add('show');document.getElementById('qrAmt').textContent='₹'+amount.toLocaleString('en-IN')};
+document.getElementById('back').onclick=()=>{document.getElementById('qrPage').classList.remove('show');document.getElementById('mainPage').classList.remove('hide');document.getElementById('paybar').style.display='block'};
+document.getElementById('confirm').onclick=()=>{document.getElementById('qrPage').classList.remove('show');document.getElementById('wait').classList.add('show');document.getElementById('waitAmt').textContent='राशि: ₹'+amount.toLocaleString('en-IN');let sec=165;const t=document.getElementById('timer');clearInterval(timerId);timerId=setInterval(()=>{sec--;t.textContent=Math.floor(sec/60)+':'+String(sec%60).padStart(2,'0');if(sec<=0){clearInterval(timerId);document.getElementById('wait').innerHTML='<h2>प्रतीक्षा समय पूरा हुआ</h2><p>भुगतान की पुष्टि के लिए कृपया अपनी रसीद/UPI ऐप में स्थिति जाँचें।</p>'}},1000)};
 </script>
 </body>
-</html>""
+</html>
